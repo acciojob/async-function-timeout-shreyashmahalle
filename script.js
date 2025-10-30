@@ -1,13 +1,20 @@
-fetch("https://jsonplaceholder.typicode.com/users")
-  .then((response) => response.json()) // convert to JSON
-  .then((data) => {
-    const userList = document.getElementById("userList");
-    data.forEach((user) => {
-      const div = document.createElement("div");
-      div.innerHTML = `${user.name} — ${user.email}`;
-      userList.appendChild(div);
-    });
-  })
-  .catch((error) => {
-    console.error("Error fetching users:", error);
-  });
+document.addEventListener('DOMContentLoaded', function() {
+  const textInput = document.getElementById('text');
+  const delayInput = document.getElementById('delay');
+  const button = document.getElementById('btn');
+  const output = document.getElementById('output');
+
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function showMessage() {
+    const message = textInput.value;
+    const delay = Number(delayInput.value);
+    output.textContent = '';
+    await wait(delay);
+    output.textContent = message;
+  }
+
+  button.addEventListener('click', showMessage);
+});
